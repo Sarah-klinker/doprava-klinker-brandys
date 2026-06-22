@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulačka ceny dopravy – Brandýs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Kalkulačka ceny dopravy</h1>
+      <p class="subtitle">Brandýs nad Labem · Raben · DNP · Vnitro / Praha 1P–6P</p>
+    </header>
+
+    <section class="input-panel">
+      <div class="field">
+        <label for="psc">PSČ doručení</label>
+        <input type="text" id="psc" placeholder="např. 27201" maxlength="6" inputmode="numeric" autocomplete="postal-code">
+      </div>
+      <div class="field">
+        <label for="weight">Hmotnost (kg)</label>
+        <input type="number" id="weight" placeholder="např. 1800" min="1" step="1">
+      </div>
+      <button type="button" id="calc-btn">Spočítat ceny</button>
+    </section>
+
+    <section id="info-panel" class="info-panel hidden">
+      <div class="info-grid">
+        <div><span class="label">PSČ</span><span id="info-psc">—</span></div>
+        <div><span class="label">Město</span><span id="info-city">—</span></div>
+        <div><span class="label">Pásmo Brandýs</span><span id="info-pasmo">—</span></div>
+      </div>
+    </section>
+
+    <section id="results" class="results hidden">
+      <h2>Výsledky</h2>
+      <div id="pallet-results" class="results-grid"></div>
+
+      <div id="vnitro-section" class="vnitro-section hidden">
+        <h3 id="vnitro-title">Vnitro / Praha</h3>
+        <div id="vnitro-summary" class="vnitro-summary"></div>
+        <table class="carrier-table">
+          <thead>
+            <tr>
+              <th>Dopravce</th>
+              <th>Základní cena</th>
+              <th>Vč. paliva (+12 %)</th>
+            </tr>
+          </thead>
+          <tbody id="vnitro-table-body"></tbody>
+        </table>
+        <p id="vnitro-note" class="footnote"></p>
+      </div>
+
+      <p id="best-note" class="best-note hidden"></p>
+    </section>
+
+    <section id="error" class="error hidden"></section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -85,12 +85,6 @@ header h1 {
   box-shadow: 0 0 0 3px rgba(19, 87, 197, 0.15);
 }
 
-.field-hint {
-  margin: 0.35rem 0 0;
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
 #calc-btn {
   padding: 0.65rem 1.25rem;
   font-size: 1rem;

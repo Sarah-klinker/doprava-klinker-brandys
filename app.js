@@ -3,6 +3,11 @@
 /** @typedef {{ limit_cn: number | null, minimum: number | null, carriers: Record<string, number | null> }} VnitroBracket */
 /** @typedef {{ key: string, label: string, max_kg: number }} WeightCategory */
 
+const CARRIER_WEIGHT_LIMITS_KG = {
+  Raben: 3000,
+  DNP: 2500,
+};
+
 let shippingData = null;
 
 async function loadData() {
@@ -95,16 +100,27 @@ function isPrahaZone(zone) {
   return String(zone).toUpperCase().endsWith("P");
 }
 
+function overWeightLimit(carrier, weight) {
+  const limit = CARRIER_WEIGHT_LIMITS_KG[carrier];
+  if (limit != null && weight > limit) {
+    return {
+      available: false,
+      reason: `Max. tonáž ${limit.toLocaleString("cs-CZ")} kg`,
+    };
+  }
+  return null;
+}
+
 function calculateRaben(psc, weight) {
-  const { psc_ranges, weights, prices, max_weight_kg } = shippingData.raben;
+  const overLimit = overWeightLimit("Raben", weight);
+  if (overLimit) {
+    return overLimit;
+  }
+
+  const { psc_ranges, weights, prices } = shippingData.raben;
   const zone = lookupPscZone(psc, psc_ranges);
   if (zone == null) {
     return { available: false, reason: "PSČ není v ceniku Raben" };
-  }
-
-  const maxWeight = max_weight_kg ?? (weights.length > 0 ? weights[weights.length - 1] : null);
-  if (maxWeight != null && weight > maxWeight) {
-    return { available: false, reason: `Hmotnost nad maximum Raben (${maxWeight.toLocaleString("cs-CZ")} kg)` };
   }
 
   const tier = findWeightTier(weight, weights);
@@ -127,15 +143,15 @@ function calculateRaben(psc, weight) {
 }
 
 function calculateDnp(psc, weight) {
-  const { psc_ranges, weights, prices, max_weight_kg } = shippingData.dnp;
+  const overLimit = overWeightLimit("DNP", weight);
+  if (overLimit) {
+    return overLimit;
+  }
+
+  const { psc_ranges, weights, prices } = shippingData.dnp;
   const range = psc_ranges.find((item) => psc >= item.psc_od && psc <= item.psc_do);
   if (!range) {
     return { available: false, reason: "PSČ není v ceniku DNP" };
-  }
-
-  const maxWeight = max_weight_kg ?? (weights.length > 0 ? weights[weights.length - 1] : null);
-  if (maxWeight != null && weight > maxWeight) {
-    return { available: false, reason: `Hmotnost nad maximum DNP (${maxWeight.toLocaleString("cs-CZ")} kg)` };
   }
 
   const tier = findWeightTier(weight, weights);

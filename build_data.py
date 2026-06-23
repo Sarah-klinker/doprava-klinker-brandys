@@ -13,6 +13,9 @@ APP_DIR = Path(__file__).resolve().parent
 DEFAULT_XLSX = Path(r"e:\AI\vnitro dopravy\Brandys\Vnitro_Brandys_final.xlsx")
 DEFAULT_OUT = APP_DIR / "data" / "shipping.json"
 
+RABEN_MAX_WEIGHT_KG = 3000
+DNP_MAX_WEIGHT_KG = 2500
+
 VNITRO_CARRIERS = ["FLEXILOG", "MB Doprava", "LEŠTINA", "LogEx", "Q CARGO"]
 PRAHA_CARRIERS = ["FLEXILOG", "MB Doprava", "Q CARGO"]
 
@@ -115,7 +118,12 @@ def parse_raben(wb: openpyxl.Workbook) -> dict:
             }
         )
 
-    return {"psc_ranges": psc_ranges, "weights": weights, "prices": prices, "max_weight_kg": weights[-1] if weights else None}
+    return {
+        "psc_ranges": psc_ranges,
+        "weights": weights,
+        "prices": prices,
+        "max_weight_kg": RABEN_MAX_WEIGHT_KG,
+    }
 
 
 def parse_dnp(wb: openpyxl.Workbook) -> dict:
@@ -156,7 +164,12 @@ def parse_dnp(wb: openpyxl.Workbook) -> dict:
             }
         )
 
-    return {"psc_ranges": psc_ranges, "weights": weights, "prices": prices, "max_weight_kg": weights[-1] if weights else None}
+    return {
+        "psc_ranges": psc_ranges,
+        "weights": weights,
+        "prices": prices,
+        "max_weight_kg": DNP_MAX_WEIGHT_KG,
+    }
 
 
 def read_vnitro_category_block(

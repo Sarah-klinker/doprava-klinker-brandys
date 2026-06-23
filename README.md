@@ -23,8 +23,8 @@ py -3 build_data.py "e:\AI\vnitro dopravy\Brandys\Vnitro_Brandys_final.xlsx"
 
 | Dopravce | Zóna | Cena |
 |----------|------|------|
-| **Raben** | Vlastní mapování PSČ → zóny 1–8 | Tarif podle hmotnosti (kg) |
-| **DNP** | Vlastní mapování PSČ → zóny 1–12 | Tarif podle hmotnosti (kg) |
+| **Raben** | Vlastní mapování PSČ → zóny 1–8 | Tarif podle hmotnosti (max. **3 000 kg**) |
+| **DNP** | Vlastní mapování PSČ → zóny 1–12 | Tarif podle hmotnosti (max. **2 500 kg**) |
 | **Vnitro** | Pásmo ze listu Zóny Brandýs (1–23) | Limit do CN, nejnižší cena, 5 dopravců + palivo 12 % |
 | **Praha P** | Pásmo 1P–6P ze Zóny Brandýs | 3 dopravci + palivo 12 % |
 

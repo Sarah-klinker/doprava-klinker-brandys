@@ -1,4 +1,4 @@
-"""Export Brandýs shipping data from Vnitro_Brandys_final.xlsx to JSON."""
+"""Export Brandýs shipping data from Vnitro_Brandys_final2.xlsx to JSON."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 import openpyxl
 
 APP_DIR = Path(__file__).resolve().parent
-DEFAULT_XLSX = Path(r"e:\AI\vnitro dopravy\Brandys\Vnitro_Brandys_final.xlsx")
+DEFAULT_XLSX = Path(r"e:\AI\vnitro dopravy\Brandys\Vnitro_Brandys_final2.xlsx")
 DEFAULT_OUT = APP_DIR / "data" / "shipping.json"
 
 RABEN_MAX_WEIGHT_KG = 3000

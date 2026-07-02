@@ -14,15 +14,21 @@
     </header>
 
     <section class="input-panel">
-      <div class="field">
-        <label for="psc">PSČ doručení</label>
-        <input type="text" id="psc" placeholder="např. 27201" maxlength="6" inputmode="numeric" autocomplete="postal-code">
+      <div class="input-panel-fields">
+        <div class="field">
+          <label for="psc">PSČ doručení</label>
+          <input type="text" id="psc" placeholder="např. 27201" maxlength="6" inputmode="numeric" autocomplete="postal-code">
+        </div>
+        <div class="field">
+          <label for="weight">Hmotnost (kg)</label>
+          <input type="number" id="weight" placeholder="např. 1800" min="1" step="1">
+        </div>
+        <button type="button" id="calc-btn">Spočítat ceny</button>
       </div>
-      <div class="field">
-        <label for="weight">Hmotnost (kg)</label>
-        <input type="number" id="weight" placeholder="např. 1800" min="1" step="1">
-      </div>
-      <button type="button" id="calc-btn">Spočítat ceny</button>
+      <label class="checkbox-field" for="nestohovat">
+        <input type="checkbox" id="nestohovat">
+        Nestohovat
+      </label>
     </section>
 
     <section id="info-panel" class="info-panel hidden">
